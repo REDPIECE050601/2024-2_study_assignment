@@ -49,9 +49,72 @@ namespace calculator
     // Calculator class to perform operations
     public class Calculator
     {
-        // ---------- TODO ----------
+        public double Calculate (double num1, string op, double num2)
+        {
+            if (op == "+"){
+                return num1 + num2;
+            }
+            
+            else if (op == "-"){
+                return num1 - num2;
+            }
+            
+            else if (op == "*"){
+                return num1 * num2;
+            }
+            
+            else if (op == "/"){
+                if(num2 != 0){
+                    return num1 / num2;
+                }
+                else throw new DivideByZeroException("Division by zero is not allowed");
+            }
+            
+            else if(op == "**"){
+                return exponential(num1, (int)num2);
+            }
+            
+            else if(op == "%"){
+                return (int)num1 % (int)num1;
+            }
+            
+            else if(op == "G"){
+                return GCD((int)num1, (int)num2);   
+            }
+            
+            else if(op == "L"){
+                return LCM((int)num1, (int)num2);
+            }
+            
+            else throw new InvalidOperationException("Invalid operator");;
+        }
         
-        // --------------------
+        private double exponential(double num1, int num2){
+            if (num2 == 1){
+                return num1;
+            }
+            else return num1*exponential(num1, num2 - 1);
+        }
+        
+        private double GCD(int num1, int num2){
+            if (num1 > num2){
+                if(num2 == 0){
+                    return num1;
+                }
+                else return GCD(num2, num1%num2);
+            }
+            else{
+                if(num1 == 0){
+                    return num2;
+                }
+                else return GCD(num1, num2%num1);
+            }
+        }
+        
+        private double LCM(int num1, int num2){
+            return (num1 * num2) / GCD(num1, num2);
+        }
+        
     }
 }
 
