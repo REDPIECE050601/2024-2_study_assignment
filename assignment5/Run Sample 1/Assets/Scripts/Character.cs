@@ -48,13 +48,13 @@ public class Character : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerEnter2D(Collider2D collide)
     {
-        switch (col.gameObject.tag)
+        switch (collide.gameObject.tag)
         {
             case "Point":
                 GM.GetPoint(1);
-                Destroy(col.gameObject);
+                Destroy(collide.gameObject);
                 break;
             default:
                 break;
