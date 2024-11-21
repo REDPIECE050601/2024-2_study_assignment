@@ -32,29 +32,32 @@ public class Character : MonoBehaviour
         GetComponent<Rigidbody2D>().AddForce(new Vector3(0, CharacterJumpPower, 0), ForceMode2D.Impulse);
     }
 
-    void OnCollisionEnter2D( Collision2D col)
+    void OnCollisionEnter2D( Collision2D collide)
     {
-        switch (col.gameObject.tag)
+        switch (collide.gameObject.tag)
         {
             case "Platform":
                 RemainJump = MaxJump;
                 break;
+
             case "Obstacle":
                 GM.GameOver();
                 break;
+
             default:
                 break;
         }
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerEnter2D(Collider2D collide)
     {
-        switch (col.gameObject.tag)
+        switch (collide.gameObject.tag)
         {
             case "Point":
                 GM.GetPoint(1);
-                Destroy(col.gameObject);
+                Destroy(collide.gameObject);
                 break;
+
             default:
                 break;
         }
