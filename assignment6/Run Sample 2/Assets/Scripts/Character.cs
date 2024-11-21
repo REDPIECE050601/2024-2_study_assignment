@@ -19,12 +19,11 @@ public class Character : MonoBehaviour
     {
         // 좌클릭시 RemainJump를 하나 소모하여 CharacterJumpPower의 힘으로 점프한다.
         // ---------- TODO ---------- 
-        if (RemainJump > 0 && Input.GetKeyDown(KeyCode.Mouse0))
+        if (RemainJump > 0 && Input.GetMouseButtonDown(0))
         {
             RemainJump--;
             Jump(CharacterJumpPower);
-        }
-        // -------------------- 
+        } 
     }
 
     // Jump with power
@@ -33,7 +32,7 @@ public class Character : MonoBehaviour
         GetComponent<Rigidbody2D>().AddForce(new Vector3(0, CharacterJumpPower, 0), ForceMode2D.Impulse);
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    void OnCollisionEnter2D( Collision2D col)
     {
         switch (col.gameObject.tag)
         {
