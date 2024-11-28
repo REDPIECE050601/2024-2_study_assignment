@@ -25,9 +25,10 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         // PlayerBall, CamObj, MyUIManager를 얻어온다.
-        // ---------- TODO ---------- 
-        
-        // -------------------- 
+
+        GameObject MyUIManager = GameObject.Find("Canvas");
+        GameObject PlayerBall = GameObject.Find("PlayerBall");
+        GameObject CamObj = GameObject.Find("Main Camera");
     }
 
     void Start()
@@ -39,9 +40,16 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // 좌클릭시 raycast하여 클릭 위치로 ShootBallTo 한다.
-        // ---------- TODO ---------- 
-        
-        // -------------------- 
+
+        Vector3 mouse_position = Input.mousePosition;
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (Physics.Raycast(PlayerBall.transform.position,mouse_position)){
+                ShootBallTo(mouse_position);
+            }
+            
+        }
     }
 
     void LateUpdate()
@@ -63,9 +71,7 @@ public class GameManager : MonoBehaviour
     void CamMove()
     {
         // CamObj는 PlayerBall을 CamSpeed의 속도로 따라간다.
-        // ---------- TODO ---------- 
-        
-        // -------------------- 
+        CamObj.transform.position = new Vector3(PlayerBall.transform.position.x, PlayerBall.transform.position.y, CamObj.transform.position.z);
     }
 
     float CalcPower(Vector3 displacement)
@@ -78,9 +84,8 @@ public class GameManager : MonoBehaviour
         // targetPos의 위치로 공을 발사한다.
         // 힘은 CalcPower 함수로 계산하고, y축 방향 힘은 0으로 한다.
         // ForceMode.Impulse를 사용한다.
-        // ---------- TODO ---------- 
-        
-        // -------------------- 
+        GetComponent<Rigidbody>().AddForce(CalcPower(targetPos), ForceMode.Impulse);
+        GetComponent<Rigidbody>().useGravity = false;
     }
     
     // When ball falls
